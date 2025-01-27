@@ -31,6 +31,7 @@ const Modal: FC<ModalProps> = ({ selectedItem, setSelectedItem }) => {
               <motion.img
                 layoutId={`${selectedItem.value}-picture`}
                 className="rounded-2xl"
+                width={200}
                 src={selectedItem.image}
               />
               <div className="flex flex-col">
