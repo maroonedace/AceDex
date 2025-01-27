@@ -32,7 +32,6 @@ const Modal: FC<ModalProps> = ({ selectedItem, setSelectedItem }) => {
                 layoutId={`${selectedItem.value}-picture`}
                 className="rounded-2xl"
                 src={selectedItem.image}
-                width={200}
               />
               <div className="flex flex-col">
                 <h2 className="font-bold">Ingredients</h2>
