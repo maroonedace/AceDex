@@ -11,25 +11,25 @@ const Modal: FC<ModalProps> = ({ selectedItem, setSelectedItem }) => {
   return (
     <AnimatePresence>
       {selectedItem && (
-        <div
-          className="fixed w-full h-full z-10 cursor-pointer"
+        <motion.div
+          className="fixed inset-0 z-10 cursor-pointer"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           onClick={() => setSelectedItem(null)}
         >
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ scale: 0, rotateY: 0 }}
+            animate={{ scale: 1, rotateY: 0 }}
+            exit={{ scale: 0, rotateY: 180 }}
+            transition={{ duration: 0.6 }}
             className="fixed bg-gray-300 bg-opacity-50 p-4 w-[90%] lg:w-[70%] xl:w-[50%] min-h-[50%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl flex flex-col gap-4"
           >
-            <motion.h1
-              className="text-xl text-black font-bold"
-              layoutId={`${selectedItem.value}-title`}
-            >
+            <h1 className="text-xl text-black font-bold">
               {selectedItem.name}
-            </motion.h1>
+            </h1>
             <div className="flex gap-4">
-              <motion.img
-                layoutId={`${selectedItem.value}-picture`}
+              <img
                 className="rounded-2xl"
                 width={200}
                 src={selectedItem.image}
@@ -45,7 +45,7 @@ const Modal: FC<ModalProps> = ({ selectedItem, setSelectedItem }) => {
             </div>
             <p>{selectedItem.instructions}</p>
           </motion.div>
-        </div>
+        </motion.div>
       )}
     </AnimatePresence>
   );
