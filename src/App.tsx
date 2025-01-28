@@ -1,24 +1,35 @@
 import "./App.css";
 import { useState } from "react";
 import Card from "./components/card";
-import { Cocktails } from "./models/cocktails";
-import { Item } from "./models/item";
+import { Recipe } from "./models/recipe";
 import Modal from "./components/modal";
+import { cocktailRecipes } from "./models/cocktails";
 
 const App = () => {
-  const [selectedItem, setSelectedItem] = useState<Item | null>(null);
+  const [selectedItem, setSelectedItem] = useState<Recipe | null>(null);
+
+  const onCardClick = (recipe: Recipe) => {
+    setSelectedItem(recipe);
+  };
+
+  const onModalClose = () => {
+    setSelectedItem(null);
+  };
 
   return (
-    <main>
-      <div className="flex p-8 justify-center">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-        {Cocktails.map((item) => (
-          <Card key={item.id} item={item} selectedItem={selectedItem} setSelected={setSelectedItem} />
+    <div className="flex p-8 justify-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        {cocktailRecipes.map((cocktail) => (
+          <Card
+            key={cocktail.id}
+            recipe={cocktail}
+            selectedRecipe={selectedItem}
+            onClick={onCardClick}
+          />
         ))}
-        </div>
-        <Modal selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
       </div>
-    </main>
+      <Modal selectedRecipe={selectedItem} onClose={onModalClose} />
+    </div>
   );
 };
 

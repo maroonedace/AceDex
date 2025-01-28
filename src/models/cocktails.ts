@@ -1,10 +1,10 @@
-import PinaColada from "../assets/pinaColada.jpg";
-import Mojito from "../assets/mojito.png";
-import StrawberryMargarita from "../assets/strawberryMargarita.jpg";
-import DirtyShirley from "../assets/dirtyShirley.jpg";
-import { Item } from "./item";
+import PinaColada from "../assets/pictures/pinaColada.jpg";
+import Mojito from "../assets/pictures/mojito.png";
+import StrawberryMargarita from "../assets/pictures/strawberryMargarita.jpg";
+import DirtyShirley from "../assets/pictures/dirtyShirley.jpg";
+import { Recipe } from "./recipe";
 
-export const Cocktails: Item[] = [
+export const cocktailRecipes: Recipe[] = [
     {
         id: 1,
         name: "Pina Colada",
