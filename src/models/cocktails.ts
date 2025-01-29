@@ -8,7 +8,6 @@ export const cocktailRecipes: Recipe[] = [
     {
         id: 1,
         name: "Pina Colada",
-        value: "pina-colada",
         image: PinaColada,
         ingredients: [
             "2 oz Bacardi Superior White Rum",
@@ -22,7 +21,6 @@ export const cocktailRecipes: Recipe[] = [
     {
         id: 2,
         name: "Mojito",
-        value: "mojito",
         image: Mojito,
         ingredients: [
             "6-8 mint leaves",
@@ -37,7 +35,6 @@ export const cocktailRecipes: Recipe[] = [
     {
         id: 3,
         name: "Strawberry Margarita",
-        value: "strawberry-margarita",
         image: StrawberryMargarita,
         ingredients: [
             "5 strawberries",
@@ -52,7 +49,6 @@ export const cocktailRecipes: Recipe[] = [
     {
         id: 4,
         name: "Dirty Shirley",
-        value: "dirty-shirley",
         image: DirtyShirley,
         ingredients: [
             "2 oz Ketel One Vodka",
