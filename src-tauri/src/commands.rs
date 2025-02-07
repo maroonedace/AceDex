@@ -6,7 +6,10 @@ use std::{env, error::Error};
 #[derive(Serialize, Deserialize, Debug)]
 pub struct TableRow {
     id: i8,
-    created_at: String
+    created_at: String,
+    ingredients: Vec<String>,
+    instructions: String,
+    image_url: String,
 }
 
 // Fetch data from Supabase
@@ -23,11 +26,6 @@ pub async fn fetch_supabase_data() -> Result<Vec<TableRow>, Box<dyn Error>> {
     let response = client
         .get(supabase_url)
         .header("apikey", &supabase_public_api_key)
-        .header(
-            "Authorization",
-            format!("Bearer {}", &supabase_public_api_key),
-        )
-        .header("Accept", "application/json")
         .send()
         .await?;
 
