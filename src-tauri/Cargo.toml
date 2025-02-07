@@ -19,6 +19,8 @@ tauri-build = { version = "2", features = [] }
 
 [dependencies]
 tauri = { version = "2", features = [] }
+aws-config = "0.55"
+aws-sdk-s3 = "0.28"
 reqwest = { version = "0.11", features = ["json"] }
 dotenv = "0.15.0"
 tauri-plugin-opener = "2"

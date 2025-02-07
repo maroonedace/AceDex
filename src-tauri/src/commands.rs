@@ -1,7 +1,11 @@
+use aws_sdk_s3::presigning::PresigningConfig;
+use aws_sdk_s3::Client as S3Client;
+use aws_config;
 use dotenv::dotenv;
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
 use std::{env, error::Error};
+use std::time::Duration;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct TableRow {
@@ -31,6 +35,19 @@ pub async fn fetch_supabase_data() -> Result<Vec<TableRow>, Box<dyn Error>> {
 
     if response.status().is_success() {
         let data = response.json().await?;
+
+        let config = aws_config::load_from_env().await;
+        let client = S3Client::new(&config);
+
+        let presigned_request = client
+            .get_object()
+            .bucket("maroonedace-recipes")
+            .key("images/pinaColada.jpg")
+            .presigned(PresigningConfig::expires_in(Duration::from_secs(3600))?) // Expires in 1 hour
+            .await?;
+
+        println!("{:?}", presigned_request.uri().to_string());
+
         Ok(data)
     } else {
         Err(format!("Failed to fetch data: {}", response.status()).into())
@@ -40,9 +57,7 @@ pub async fn fetch_supabase_data() -> Result<Vec<TableRow>, Box<dyn Error>> {
 #[tauri::command]
 pub async fn get_data() -> Result<Vec<TableRow>, String> {
     match fetch_supabase_data().await {
-        Ok(data) => {
-            Ok(data)
-        }
+        Ok(data) => Ok(data),
         Err(e) => Err(format!("Error fetching data: {}", e)),
     }
 }
