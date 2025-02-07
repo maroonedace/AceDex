@@ -1,12 +1,29 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "./components/card";
 import { Recipe } from "./models/recipe";
 import Modal from "./components/modal";
 import { cocktailRecipes } from "./models/cocktails";
+import { core } from "@tauri-apps/api";
+
+type Data = {
+  id: number;
+};
 
 const App = () => {
   const [selectedItem, setSelectedItem] = useState<Recipe | null>(null);
+
+  const [data, setData] = useState<Data[] | null>(null);
+
+  useEffect(() => {
+    const getData = () => {
+
+      const banana = core.invoke("get_data")
+      console.log(banana)
+    };
+
+    getData()
+  }, []);
 
   const onCardClick = (recipe: Recipe) => {
     setSelectedItem(recipe);
