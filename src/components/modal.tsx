@@ -32,7 +32,7 @@ const Modal: FC<ModalProps> = ({ selectedRecipe, onClose }) => {
               <img
                 className="rounded-2xl"
                 width={200}
-                src={selectedRecipe.image}
+                src={selectedRecipe.image_url}
               />
               <div className="flex flex-col">
                 <h2 className="font-bold">Ingredients</h2>

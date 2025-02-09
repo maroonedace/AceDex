@@ -10,10 +10,25 @@ use std::time::Duration;
 #[derive(Serialize, Deserialize, Debug)]
 pub struct TableRow {
     id: i8,
+    name: String,
     created_at: String,
     ingredients: Vec<String>,
     instructions: String,
     image_url: String,
+}
+
+pub async fn fetch_s3_request(key: String) -> Result<String, Box<dyn Error>> {
+    let config = aws_config::load_from_env().await;
+    let client = S3Client::new(&config);
+
+    let presigned_request = client
+        .get_object()
+        .bucket("maroonedace-recipes")
+        .key(key)
+        .presigned(PresigningConfig::expires_in(Duration::from_secs(3600))?) // Expires in 1 hour
+        .await?;
+
+    Ok(presigned_request.uri().to_string())
 }
 
 // Fetch data from Supabase
@@ -34,19 +49,11 @@ pub async fn fetch_supabase_data() -> Result<Vec<TableRow>, Box<dyn Error>> {
         .await?;
 
     if response.status().is_success() {
-        let data = response.json().await?;
+        let mut data: Vec<TableRow> = response.json().await?;
 
-        let config = aws_config::load_from_env().await;
-        let client = S3Client::new(&config);
-
-        let presigned_request = client
-            .get_object()
-            .bucket("maroonedace-recipes")
-            .key("images/pinaColada.jpg")
-            .presigned(PresigningConfig::expires_in(Duration::from_secs(3600))?) // Expires in 1 hour
-            .await?;
-
-        println!("{:?}", presigned_request.uri().to_string());
+        for item in &mut data {
+            item.image_url = fetch_s3_request(item.image_url.clone()).await?;
+        }
 
         Ok(data)
     } else {
