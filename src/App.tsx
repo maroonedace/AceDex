@@ -5,21 +5,17 @@ import { Recipe } from "./models/recipe";
 import Modal from "./components/modal";
 import useCocktails from "./services/useCocktails";
 
-type Data = {
-  id: number;
-};
-
 const App: FC = () => {
-  const [selectedItem, setSelectedItem] = useState<Recipe | null>(null);
+  const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
 
   const { cocktails, isCocktailsFetched } = useCocktails();
 
   const onCardClick = (recipe: Recipe) => {
-    setSelectedItem(recipe);
+    setSelectedRecipe(recipe);
   };
 
   const onModalClose = () => {
-    setSelectedItem(null);
+    setSelectedRecipe(null);
   };
 
   return (
@@ -31,14 +27,14 @@ const App: FC = () => {
               <Card
                 key={recipe.id}
                 recipe={recipe}
-                selectedRecipe={selectedItem}
+                selectedRecipe={selectedRecipe}
                 onClick={onCardClick}
               />
             );
           })}
         </div>
       )}
-      <Modal selectedRecipe={selectedItem} onClose={onModalClose} />
+      <Modal selectedRecipe={selectedRecipe} onClose={onModalClose} />
     </div>
   );
 };

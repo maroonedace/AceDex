@@ -12,7 +12,7 @@ const Modal: FC<ModalProps> = ({ selectedRecipe, onClose }) => {
     <AnimatePresence>
       {selectedRecipe && (
         <motion.div
-          className="fixed inset-0 z-10 cursor-pointer"
+          className="fixed inset-0 z-10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
