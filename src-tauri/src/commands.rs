@@ -1,13 +1,13 @@
+use aws_config;
 use aws_sdk_s3::presigning::PresigningConfig;
 use aws_sdk_s3::Client as S3Client;
-use aws_config;
 use dotenv::dotenv;
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
-use std::{env, error::Error};
 use std::time::Duration;
+use std::{env, error::Error};
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Ord, PartialOrd, Eq, PartialEq)]
 pub struct Recipe {
     id: i8,
     name: String,
@@ -52,12 +52,17 @@ pub async fn fetch_recipes(recipe_type: String) -> Result<Vec<Recipe>, Box<dyn E
         let mut data: Vec<Recipe> = response.json().await?;
 
         if !&recipe_type.is_empty() {
-            data = data.into_iter().filter(|row| row.recipe_type.contains(&recipe_type)).collect();
+            data = data
+                .into_iter()
+                .filter(|row| row.recipe_type.contains(&recipe_type))
+                .collect();
         }
 
         for item in &mut data {
             item.image_url = fetch_s3_images(item.image_url.clone()).await?;
         }
+
+        data.sort_by(|a, b| a.name.cmp(&b.name));
 
         Ok(data)
     } else {
