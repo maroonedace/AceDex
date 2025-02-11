@@ -8,16 +8,17 @@ use std::{env, error::Error};
 use std::time::Duration;
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct TableRow {
+pub struct Recipe {
     id: i8,
     name: String,
     created_at: String,
     ingredients: Vec<String>,
     instructions: String,
     image_url: String,
+    recipe_type: String,
 }
 
-pub async fn fetch_s3_request(key: String) -> Result<String, Box<dyn Error>> {
+pub async fn fetch_s3_images(key: String) -> Result<String, Box<dyn Error>> {
     let config = aws_config::load_from_env().await;
     let client = S3Client::new(&config);
 
@@ -31,13 +32,12 @@ pub async fn fetch_s3_request(key: String) -> Result<String, Box<dyn Error>> {
     Ok(presigned_request.uri().to_string())
 }
 
-// Fetch data from Supabase
-pub async fn fetch_supabase_data() -> Result<Vec<TableRow>, Box<dyn Error>> {
+pub async fn fetch_recipes(recipe_type: String) -> Result<Vec<Recipe>, Box<dyn Error>> {
     dotenv().ok();
 
     let supabase_public_api_key = env::var("SUPABASE_PUBLIC_API_KEY").unwrap();
     let supabase_url = env::var("SUPABASE_URL").unwrap();
-    let table_name = "cocktails";
+    let table_name = "recipes";
 
     let supabase_url = &format!("{}/rest/v1/{}", supabase_url, table_name);
 
@@ -49,10 +49,14 @@ pub async fn fetch_supabase_data() -> Result<Vec<TableRow>, Box<dyn Error>> {
         .await?;
 
     if response.status().is_success() {
-        let mut data: Vec<TableRow> = response.json().await?;
+        let mut data: Vec<Recipe> = response.json().await?;
+
+        if !&recipe_type.is_empty() {
+            data = data.into_iter().filter(|row| row.recipe_type.contains(&recipe_type)).collect();
+        }
 
         for item in &mut data {
-            item.image_url = fetch_s3_request(item.image_url.clone()).await?;
+            item.image_url = fetch_s3_images(item.image_url.clone()).await?;
         }
 
         Ok(data)
@@ -62,8 +66,8 @@ pub async fn fetch_supabase_data() -> Result<Vec<TableRow>, Box<dyn Error>> {
 }
 
 #[tauri::command]
-pub async fn get_data() -> Result<Vec<TableRow>, String> {
-    match fetch_supabase_data().await {
+pub async fn get_recipes(recipe_type: String) -> Result<Vec<Recipe>, String> {
+    match fetch_recipes(recipe_type).await {
         Ok(data) => Ok(data),
         Err(e) => Err(format!("Error fetching data: {}", e)),
     }

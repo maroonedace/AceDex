@@ -2,12 +2,12 @@ import { useState } from "react";
 import Modal from "../components/modal";
 import { Recipe } from "../models/recipe";
 import Card from "../components/card";
-import useCocktails from "../services/useCocktails";
+import useRecipes from "../services/useRecipes";
 
 const Cocktails = () => {
   const [selectedCocktail, setSelectedCocktail] = useState<Recipe | null>(null);
 
-  const { cocktails, isCocktailsFetched } = useCocktails();
+  const { recipes: cocktails, isRecipesFetched: isCocktailsFetched } = useRecipes("cocktail");
 
   const onCardClick = (cocktail: Recipe) => {
     setSelectedCocktail(cocktail);
