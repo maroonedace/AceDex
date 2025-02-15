@@ -19,6 +19,9 @@ pub struct Recipe {
     instructions: Vec<String>,
     image_url: String,
     recipe_type: String,
+    serving_size: i8,
+    prep_time: i8,
+    cook_time: i8,
 }
 
 pub async fn fetch_s3_images(key: String) -> Result<String, Box<dyn Error>> {

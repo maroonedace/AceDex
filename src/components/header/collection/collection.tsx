@@ -36,7 +36,7 @@ const Collection = () => {
     <div className="relative" ref={collectionRef}>
       <button
         onClick={toggleCollection}
-        className={`inline-flex text-sm gap-2 items-center hover:bg-gray-700 px-4 py-2 rounded-2xl cursor-pointer ${
+        className={`flex text-sm gap-2 items-center hover:bg-gray-700 px-4 py-2 rounded-2xl cursor-pointer ${
           isCollectionOpen ? "bg-gray-700" : ""
         }`}
       >
