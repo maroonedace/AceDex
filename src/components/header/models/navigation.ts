@@ -12,4 +12,9 @@ export const collectionLinks: CollectionLinkContent[] = [
     icon: CocktailSvg,
     url: "/cocktails",
   },
+  {
+    text: "Pokemon",
+    icon: CocktailSvg,
+    url: "/pokemon",
+  },
 ];

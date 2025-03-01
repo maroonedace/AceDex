@@ -24,7 +24,7 @@ pub struct Recipe {
     cook_time: i8,
 }
 
-pub async fn fetch_s3_images(key: String) -> Result<String, Box<dyn Error>> {
+async fn fetch_s3_images(key: String) -> Result<String, Box<dyn Error>> {
     let config = aws_config::load_from_env().await;
     let client = S3Client::new(&config);
 
@@ -38,7 +38,7 @@ pub async fn fetch_s3_images(key: String) -> Result<String, Box<dyn Error>> {
     Ok(presigned_request.uri().to_string())
 }
 
-pub async fn fetch_recipes(recipe_type: String) -> Result<Vec<Recipe>, Box<dyn Error>> {
+async fn fetch_recipes(recipe_type: String) -> Result<Vec<Recipe>, Box<dyn Error>> {
     dotenv().ok();
 
     let supabase_url = var("SUPABASE_URL").expect("SUPABASE_URL not set");

@@ -6,3 +6,8 @@ export const fetchRecipes = (type?: string): Promise<Recipe[]> => {
   const data: Promise<Recipe[]> = invoke("get_recipes", {recipeType});
   return data;
 };
+
+export const fetchPokemon = (): Promise<any> => {
+  const data: Promise<Recipe[]> = invoke("get_pokemon");
+  return data;
+};
