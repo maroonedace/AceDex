@@ -1,5 +1,6 @@
 import { invoke } from "@tauri-apps/api/core";
 import { Recipe } from "../models/recipe";
+import { Pokemon } from "../models/pokemon";
 
 export const fetchRecipes = (type?: string): Promise<Recipe[]> => {
   const recipeType = type ? type: ""
@@ -7,7 +8,7 @@ export const fetchRecipes = (type?: string): Promise<Recipe[]> => {
   return data;
 };
 
-export const fetchPokemon = (): Promise<any> => {
-  const data: Promise<Recipe[]> = invoke("get_pokemon");
+export const fetchPokemon = (): Promise<Pokemon[]> => {
+  const data: Promise<Pokemon[]> = invoke("get_pokemon");
   return data;
 };
