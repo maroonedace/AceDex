@@ -1,14 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchPokemon } from "../api/api";
 
-const usePokemon = () => {
+const usePokemon = (index: number) => {
   const queryKey = [
-    "pokemon"
+    "pokemon",
+    index
   ]
 
   const { data, isFetched } = useQuery({
     queryKey,
-    queryFn: () => fetchPokemon(),
+    queryFn: () => fetchPokemon(index),
   });
 
   return {
