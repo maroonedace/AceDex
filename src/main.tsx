@@ -1,29 +1,25 @@
-import React, { FC } from "react";
+import { FC, StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
 import { BrowserRouter, Route, Routes } from "react-router";
-import Cocktails from "./cocktails/cocktails";
 import Layout from "./components/layout";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Pokemon from "./pokemon/pokemon";
+import App from "./App";
 
 const Main: FC = () => {
   const queryClient = new QueryClient();
 
   return (
-    <React.StrictMode>
+    <StrictMode>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<App />} />
-              <Route path="/cocktails" element={<Cocktails />} />
-              <Route path="/pokemon" element={<Pokemon />} />
             </Route>
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>
-    </React.StrictMode>
+    </StrictMode>
   );
 };
 

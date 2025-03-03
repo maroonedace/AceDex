@@ -1,29 +1,17 @@
-import { motion } from "motion/react";
 import usePokemon from "../services/usePokemon";
 import { useState } from "react";
+import PokemonCard from "./pokemonCard";
 
 const Pokemon = () => {
-
   const [index, setIndex] = useState(0);
 
   const { pokemon } = usePokemon(index);
 
-
   return (
     <div className="flex flex-col p-8 justify-center w-full gap-4">
-      <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8">
         {pokemon?.map((poke) => {
-          const name = poke.name[0].toUpperCase() + poke.name.slice(1);
-          return (
-            <motion.div
-              initial={{ scale: 1 }}
-              whileHover={{ scale: 1.1 }}
-              className="border rounded-2xl h-40 w-40 flex flex-col items-center justify-center cursor-pointer"
-            >
-              <img src={poke.sprites.front_default} alt={poke.name} />
-              <p>{name}</p>
-            </motion.div>
-          );
+          return <PokemonCard key={poke.id} pokemon={poke} />;
         })}
       </div>
       <div className="flex gap-4">
