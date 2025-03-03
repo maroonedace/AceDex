@@ -8,7 +8,7 @@ export const fetchRecipes = (type?: string): Promise<Recipe[]> => {
   return data;
 };
 
-export const fetchPokemon = (index: number): Promise<Pokemon[]> => {
-  const data: Promise<Pokemon[]> = invoke("get_pokemon", {index});
+export const fetchPokemonByGeneration = (generation: string): Promise<Pokemon[]> => {
+  const data: Promise<Pokemon[]> = invoke("get_pokemon_by_generation", {generation});
   return data;
 };

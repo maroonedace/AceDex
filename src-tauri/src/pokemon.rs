@@ -1,6 +1,7 @@
-use rustemon::client::{CacheMode, RustemonClient, RustemonClientBuilder, CACacheManager};
+use rustemon::client::{CACacheManager, CacheMode, MokaManager, RustemonClient, RustemonClientBuilder};
 use rustemon::error::Error;
 use rustemon::model::pokemon::{Pokemon, PokemonSpecies};
+use rustemon::games::generation;
 use rustemon::pokemon::{pokemon, pokemon_species};
 use serde::{Deserialize, Serialize};
 
@@ -30,22 +31,24 @@ async fn fetch_pokemon_species(id: i64, client: &RustemonClient) -> Result<Pokem
     }
 }
 
-async fn fetch_pokemon(index: i64) -> Result<Vec<PokemonData>, Error> {
+async fn fetch_pokemon_by_generation(generation: &str) -> Result<Vec<PokemonData>, Error> {
     let client = RustemonClientBuilder::default()
-        .with_manager(CACacheManager::default())
+        .with_manager(MokaManager::default())
+        // .with_mode(CacheMode::NoCache)
         .try_build()
         .unwrap();
-    let pokemon_limit = 25;
+
+
 
     let pokemon_list =
-        match pokemon::get_page_with_param(index * pokemon_limit, pokemon_limit, &client).await {
+        match generation::get_by_name(generation, &client).await {
             Ok(list) => list,
             Err(e) => return Err(e),
         };
 
     let mut pokemon_detail_list = Vec::new();
 
-    for item in pokemon_list.results {
+    for item in pokemon_list.pokemon_species {
         let pokemon = fetch_pokemon_data(&item.name, &client).await?;
         let species = fetch_pokemon_species(pokemon.id, &client).await?;
         let species_name = species.genera[7].genus.clone();
@@ -64,12 +67,14 @@ async fn fetch_pokemon(index: i64) -> Result<Vec<PokemonData>, Error> {
         pokemon_detail_list.push(pokemon_data);
     }
 
+    pokemon_detail_list.sort_by(|a, b| a.id.cmp(&b.id));
+
     Ok(pokemon_detail_list)
 }
 
 #[tauri::command]
-pub async fn get_pokemon(index: i64) -> Result<Vec<PokemonData>, String> {
-    match fetch_pokemon(index).await {
+pub async fn get_pokemon_by_generation(generation: &str) -> Result<Vec<PokemonData>, String> {
+    match fetch_pokemon_by_generation(generation).await {
         Ok(data) => Ok(data),
         Err(e) => Err(format!("Error fetching data: {}", e)),
     }

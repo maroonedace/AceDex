@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Pokemon, PokemonColors } from "../models/pokemon";
+import { Pokemon, pokemonColors } from "../models/pokemon";
 import { FC } from "react";
 
 interface PokemonCardProps {
@@ -8,7 +8,7 @@ interface PokemonCardProps {
 
 const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
   const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
-  const colors = PokemonColors[pokemon.pokemon_type];
+  const colors = pokemonColors[pokemon.pokemon_type];
   const weight = (pokemon.weight / 10) * 2.20462;
 
 

@@ -1,15 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchPokemon } from "../api/api";
+import { fetchPokemonByGeneration } from "../api/api";
 
-const usePokemon = (index: number) => {
+const usePokemon = (generation: string) => {
   const queryKey = [
     "pokemon",
-    index
+    generation
   ]
 
   const { data, isFetched } = useQuery({
     queryKey,
-    queryFn: () => fetchPokemon(index),
+    queryFn: () => fetchPokemonByGeneration(generation),
   });
 
   return {

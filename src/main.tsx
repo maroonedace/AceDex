@@ -1,6 +1,6 @@
 import { FC, StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Route, Routes } from "react-router";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import Layout from "./components/layout";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import App from "./App";
@@ -14,7 +14,8 @@ const Main: FC = () => {
         <BrowserRouter>
           <Routes>
             <Route element={<Layout />}>
-              <Route path="/" element={<App />} />
+              <Route path="/" element={<Navigate to="/generation-i" replace />} />
+              <Route path="/:generation" element={<App />} />
             </Route>
           </Routes>
         </BrowserRouter>
