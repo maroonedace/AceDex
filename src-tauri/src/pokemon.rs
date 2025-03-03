@@ -1,4 +1,4 @@
-use rustemon::client::{CacheMode, RustemonClient, RustemonClientBuilder, MokaManager};
+use rustemon::client::{CacheMode, RustemonClient, RustemonClientBuilder, CACacheManager};
 use rustemon::error::Error;
 use rustemon::model::pokemon::{Pokemon, PokemonSpecies};
 use rustemon::pokemon::{pokemon, pokemon_species};
@@ -32,8 +32,7 @@ async fn fetch_pokemon_species(id: i64, client: &RustemonClient) -> Result<Pokem
 
 async fn fetch_pokemon(index: i64) -> Result<Vec<PokemonData>, Error> {
     let client = RustemonClientBuilder::default()
-        .with_manager(MokaManager::default())
-        .with_mode(CacheMode::NoStore)
+        .with_manager(CACacheManager::default())
         .try_build()
         .unwrap();
     let pokemon_limit = 25;
