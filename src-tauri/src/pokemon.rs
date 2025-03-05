@@ -1,4 +1,4 @@
-use rustemon::client::{CACacheManager, CacheMode, MokaManager, RustemonClient, RustemonClientBuilder};
+use rustemon::client::{RustemonClient};
 use rustemon::error::Error;
 use rustemon::model::pokemon::{Pokemon, PokemonSpecies};
 use rustemon::games::generation;
