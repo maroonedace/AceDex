@@ -46,6 +46,7 @@ const Header: FC = () => {
       <header className="bg-gray-800 text-white p-4 flex gap-4 items-center">
         {pokemonGenerations.map((gen) => (
           <Link
+            key={gen.name}
             className={`flex items-center gap-2 pl-4 pr-8 py-2 justify-start rounded-2xl hover:bg-gray-700`}
             to={gen.url}
           >
