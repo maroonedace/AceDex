@@ -54,7 +54,7 @@ async fn fetch_pokemon_by_generation(generation: &str) -> Result<Vec<PokemonData
             name: pokemon.name,
             height: pokemon.height,
             weight: pokemon.weight,
-            species: genera.language.name,
+            species: genera.genus,
             pokemon_type: pokemon_type,
             image_url: pokemon.sprites.front_default,
             flavor_text: flavor_text_entry.flavor_text,

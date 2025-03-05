@@ -4,7 +4,7 @@ export type Pokemon = {
     height: number,
     weight: number,
     species: string,
-    pokemon_type: string,
+    pokemon_type: string[],
     image_url: string,
     flavor_text: string,
 }

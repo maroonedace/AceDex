@@ -8,7 +8,7 @@ interface PokemonCardProps {
 
 const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
   const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
-  const colors = pokemonColors[pokemon.pokemon_type];
+  const colors = pokemonColors[pokemon.pokemon_type[0]];
   const weight = (pokemon.weight / 10) * 2.20462;
 
 
