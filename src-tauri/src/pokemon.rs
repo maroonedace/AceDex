@@ -17,28 +17,22 @@ pub struct PokemonData {
     flavor_text: String,
 }
 
-async fn fetch_pokemon_data(name: &str, client: &RustemonClient) -> Result<Pokemon, Error> {
-    match pokemon::get_by_name(name, &client).await {
+async fn fetch_pokemon_data(id: i64, client: &RustemonClient) -> Result<Pokemon, Error> {
+    match pokemon::get_by_id(id, &client).await {
         Ok(pokemon_details) => Ok(pokemon_details),
         Err(e) => Err(e),
     }
 }
 
-async fn fetch_pokemon_species(id: i64, client: &RustemonClient) -> Result<PokemonSpecies, Error> {
-    match pokemon_species::get_by_id(id, &client).await {
+async fn fetch_pokemon_species(name: &str, client: &RustemonClient) -> Result<PokemonSpecies, Error> {
+    match pokemon_species::get_by_name(name, &client).await {
         Ok(pokemon_details) => Ok(pokemon_details),
         Err(e) => Err(e),
     }
 }
 
 async fn fetch_pokemon_by_generation(generation: &str) -> Result<Vec<PokemonData>, Error> {
-    let client = RustemonClientBuilder::default()
-        .with_manager(MokaManager::default())
-        // .with_mode(CacheMode::NoCache)
-        .try_build()
-        .unwrap();
-
-
+    let client = RustemonClient::default();
 
     let pokemon_list =
         match generation::get_by_name(generation, &client).await {
@@ -48,9 +42,9 @@ async fn fetch_pokemon_by_generation(generation: &str) -> Result<Vec<PokemonData
 
     let mut pokemon_detail_list = Vec::new();
 
-    for item in pokemon_list.pokemon_species {
-        let pokemon = fetch_pokemon_data(&item.name, &client).await?;
-        let species = fetch_pokemon_species(pokemon.id, &client).await?;
+    for pokemon_creature in pokemon_list.pokemon_species {
+        let species = fetch_pokemon_species(&pokemon_creature.name, &client).await?;
+        let pokemon = fetch_pokemon_data(species.id, &client).await?;
         let species_name = species.genera[7].genus.clone();
 
         let pokemon_data = PokemonData {
