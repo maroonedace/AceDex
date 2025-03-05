@@ -54,100 +54,100 @@ export const pokemonGenerations: PokemonGenerations[] = [
 ]
 
 type PokemonColors = {
-    bg: string,
-    imagebg: string,
-    textbg: string
+    cardBg: string,
+    imageBg: string,
+    textBg: string
 }
 
 export const pokemonColors: Record<string, PokemonColors> = {
-    fire: {
-        bg: "bg-orange-500",
-        imagebg: "bg-orange-300",
-        textbg: "bg-orange-200"
-    },
-    water: {
-        bg: "bg-blue-500",
-        imagebg: "bg-blue-300",
-        textbg: "bg-blue-200"
-    },
-    grass: {
-        bg: "bg-green-500",
-        imagebg: "bg-green-300",
-        textbg: "bg-green-200"
-    },
-    electric: {
-        bg: "bg-yellow-500",
-        imagebg: "bg-yellow-300",
-        textbg: "bg-yellow-200"
-    },
-    psychic: {
-        bg: "bg-purple-500",
-        imagebg: "bg-purple-300",
-        textbg: "bg-purple-200"
-    },
-    ice: {
-        bg: "bg-blue-200",
-        imagebg: "bg-blue-100",
-        textbg: "bg-blue-50"
-    },
-    dragon: {
-        bg: "bg-red-500",
-        imagebg: "bg-red-300",
-        textbg: "bg-red-200"
-    },
-    dark: {
-        bg: "bg-gray-500",
-        imagebg: "bg-gray-300",
-        textbg: "bg-gray-200"
-    },
-    steel: {
-        bg: "bg-gray-500",
-        imagebg: "bg-gray-300",
-        textbg: "bg-gray-200"
-    },
-    fairy: {
-        bg: "bg-pink-500",
-        imagebg: "bg-pink-300",
-        textbg: "bg-pink-200"
-    },
     normal: {
-        bg: "bg-gray-500",
-        imagebg: "bg-gray-300",
-        textbg: "bg-gray-200"
-    },
-    fighting: {
-        bg: "bg-red-500",
-        imagebg: "bg-red-300",
-        textbg: "bg-red-200"
-    },
-    flying: {
-        bg: "bg-blue-500",
-        imagebg: "bg-blue-300",
-        textbg: "bg-blue-200"
-    },
-    poison: {
-        bg: "bg-purple-500",
-        imagebg: "bg-purple-300",
-        textbg: "bg-purple-200"
-    },
-    ground: {
-        bg: "bg-yellow-500",
-        imagebg: "bg-yellow-300",
-        textbg: "bg-yellow-200"
-    },
-    bug: {
-        bg: "bg-green-500",
-        imagebg: "bg-green-300",
-        textbg: "bg-green-200"
-    },
-    rock: {
-        bg: "bg-yellow-500",
-        imagebg: "bg-yellow-300",
-        textbg: "bg-yellow-200"
-    },
-    ghost: {
-        bg: "bg-purple-500",
-        imagebg: "bg-purple-300",
-        textbg: "bg-purple-200"
-    },
+        cardBg: "bg-[#A8A77A]",
+        imageBg: "bg-[#8D8D64]",
+        textBg: "bg-[#C6C6A7]",
+      },
+      fire: {
+        cardBg: "bg-[#EE8130]",
+        imageBg: "bg-[#C76A29]",
+        textBg: "bg-[#F5AC78]",
+      },
+      water: {
+        cardBg: "bg-[#6390F0]",
+        imageBg: "bg-[#4A74D2]",
+        textBg: "bg-[#9DB7F5]",
+      },
+      electric: {
+        cardBg: "bg-[#F7D02C]",
+        imageBg: "bg-[#C4A720]",
+        textBg: "bg-[#FAE078]",
+      },
+      grass: {
+        cardBg: "bg-[#7AC74C]",
+        imageBg: "bg-[#5E9E3A]",
+        textBg: "bg-[#A7DB8D]",
+      },
+      ice: {
+        cardBg: "bg-[#96D9D6]",
+        imageBg: "bg-[#6FB3B0]",
+        textBg: "bg-[#BCE6E6]",
+      },
+      fighting: {
+        cardBg: "bg-[#C22E28]",
+        imageBg: "bg-[#A02520]",
+        textBg: "bg-[#D67873]",
+      },
+      poison: {
+        cardBg: "bg-[#A33EA1]",
+        imageBg: "bg-[#822F81]",
+        textBg: "bg-[#C183C1]",
+      },
+      ground: {
+        cardBg: "bg-[#E2BF65]",
+        imageBg: "bg-[#B89B50]",
+        textBg: "bg-[#EBD69D]",
+      },
+      flying: {
+        cardBg: "bg-[#A98FF3]",
+        imageBg: "bg-[#8873CC]",
+        textBg: "bg-[#C6B7F5]",
+      },
+      psychic: {
+        cardBg: "bg-[#F95587]",
+        imageBg: "bg-[#D13D68]",
+        textBg: "bg-[#FA92B2]",
+      },
+      bug: {
+        cardBg: "bg-[#A6B91A]",
+        imageBg: "bg-[#849014]",
+        textBg: "bg-[#C6D16E]",
+      },
+      rock: {
+        cardBg: "bg-[#B6A136]",
+        imageBg: "bg-[#8F7D29]",
+        textBg: "bg-[#D1C17D]",
+      },
+      ghost: {
+        cardBg: "bg-[#735797]",
+        imageBg: "bg-[#5A4476]",
+        textBg: "bg-[#A292BC]",
+      },
+      dragon: {
+        cardBg: "bg-[#6F35FC]",
+        imageBg: "bg-[#5429D1]",
+        textBg: "bg-[#A27DFA]",
+      },
+      dark: {
+        cardBg: "bg-[#705746]",
+        imageBg: "bg-[#574236]",
+        textBg: "bg-[#A29288]",
+      },
+      steel: {
+        cardBg: "bg-[#B7B7CE]",
+        imageBg: "bg-[#9090A6]",
+        textBg: "bg-[#D1D1E0]",
+      },
+      fairy: {
+        cardBg: "bg-[#D685AD]",
+        imageBg: "bg-[#AE6E8A]",
+        textBg: "bg-[#F4BDC9]",
+      },
 }
