@@ -1,4 +1,4 @@
-use rustemon::client::{RustemonClient};
+use rustemon::client::RustemonClient;
 use rustemon::error::Error;
 use rustemon::model::pokemon::{Pokemon, PokemonSpecies};
 use rustemon::games::generation;
@@ -12,7 +12,7 @@ pub struct PokemonData {
     height: i64,
     weight: i64,
     species: String,
-    pokemon_type: String,
+    pokemon_type: Vec<String>,
     image_url: Option<String>,
     flavor_text: String,
 }
@@ -45,17 +45,19 @@ async fn fetch_pokemon_by_generation(generation: &str) -> Result<Vec<PokemonData
     for pokemon_creature in pokemon_list.pokemon_species {
         let species = fetch_pokemon_species(&pokemon_creature.name, &client).await?;
         let pokemon = fetch_pokemon_data(species.id, &client).await?;
-        let species_name = species.genera[7].genus.clone();
+        let genera = species.genera.iter().find(|x| x.language.name == "en").unwrap().clone();
+        let flavor_text_entry = species.flavor_text_entries.iter().find(|x| x.language.name == "en").unwrap().clone();
+        let pokemon_type = pokemon.types.iter().map(|x| x.type_.name.clone()).collect();
 
         let pokemon_data = PokemonData {
             id: pokemon.id,
             name: pokemon.name,
             height: pokemon.height,
             weight: pokemon.weight,
-            species: species_name,
-            pokemon_type: pokemon.types[0].type_.name.clone(),
+            species: genera.language.name,
+            pokemon_type: pokemon_type,
             image_url: pokemon.sprites.front_default,
-            flavor_text: species.flavor_text_entries[0].flavor_text.clone(),
+            flavor_text: flavor_text_entry.flavor_text,
         };
 
         pokemon_detail_list.push(pokemon_data);
