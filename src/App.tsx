@@ -6,9 +6,9 @@ import { useParams } from "react-router";
 
 const App: FC = () => {
 
-  const { pokemonGeneration} = useParams();
+  const { generation } = useParams();
 
-  const { pokemon } = usePokemon(pokemonGeneration || "generation-i");
+  const { pokemon } = usePokemon(generation || "generation-i");
 
   return (
     <div className="flex flex-col p-8 justify-center w-full gap-4">
