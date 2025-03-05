@@ -4,7 +4,11 @@ use supabase_rs::SupabaseClient;
 
 use std::{env::var, error::Error};
 
-use serde_json::json;
+mod model;
+use model::POKEMON_GENERATIONS;
+
+mod pokemon;
+use pokemon::fetch_pokemon_by_generation;
 
 #[tokio::main]
 async fn main() {
@@ -23,11 +27,19 @@ pub async fn insert_pokemon() -> Result<(), Box<dyn Error>> {
     let table_name = "pokemon";
 
     let supabase_client: SupabaseClient =
-    SupabaseClient::new(supabase_url, supabase_public_api_key);
+        SupabaseClient::new(supabase_url, supabase_public_api_key);
 
-    let _response = supabase_client.insert(table_name, json!({
-        "id": 1,
-    })).await;
+    let mut pokemon_list = Vec::new();
+
+    for pokemon_generation_info in POKEMON_GENERATIONS {
+        let pokemon = fetch_pokemon_by_generation(pokemon_generation_info).await?;
+
+        pokemon_list.extend(pokemon);
+    }
+
+    let _response = supabase_client
+        .bulk_insert(table_name, pokemon_list)
+        .await;
 
     Ok(())
 }
