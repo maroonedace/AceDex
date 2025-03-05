@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
 
 const pokemonGenerations = [
   {
@@ -41,13 +41,17 @@ const pokemonGenerations = [
 ];
 
 const Header: FC = () => {
+  const { generation } = useParams();
+
+  
   return (
     <div>
       <header className="bg-gray-800 text-white p-4 flex gap-4 items-center">
         {pokemonGenerations.map((gen) => (
           <Link
             key={gen.name}
-            className={`flex items-center gap-2 pl-4 pr-8 py-2 justify-start rounded-2xl hover:bg-gray-700`}
+            className={`flex items-center gap-2 pl-4 pr-8 py-2 justify-start rounded-2xl hover:bg-gray-700 ${
+              generation === gen.url ? "bg-gray-700": ""}`}
             to={gen.url}
           >
             {gen.name}
