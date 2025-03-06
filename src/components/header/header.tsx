@@ -4,61 +4,59 @@ import { Link, useParams } from "react-router";
 const pokemonGenerations = [
   {
     name: "Gen 1",
-    url: "generation-i",
+    url: "1",
   },
   {
     name: "Gen 2",
-    url: "generation-ii",
+    url: "2",
   },
   {
     name: "Gen 3",
-    url: "generation-iii",
+    url: "3",
   },
   {
     name: "Gen 4",
-    url: "generation-iv",
+    url: "4",
   },
   {
     name: "Gen 5",
-    url: "generation-v",
+    url: "5",
   },
   {
     name: "Gen 6",
-    url: "generation-vi",
+    url: "6",
   },
   {
     name: "Gen 7",
-    url: "generation-vii",
+    url: "7",
   },
   {
     name: "Gen 8",
-    url: "generation-viii",
+    url: "8",
   },
   {
     name: "Gen 9",
-    url: "generation-ix",
+    url: "9",
   },
 ];
 
 const Header: FC = () => {
   const { generation } = useParams();
 
-  
   return (
-    <div>
-      <header className="bg-gray-800 text-white p-4 flex gap-4 items-center">
-        {pokemonGenerations.map((gen) => (
-          <Link
-            key={gen.name}
-            className={`flex items-center gap-2 pl-4 pr-8 py-2 justify-start rounded-2xl hover:bg-gray-700 ${
-              generation === gen.url ? "bg-gray-700": ""}`}
-            to={gen.url}
-          >
-            {gen.name}
-          </Link>
-        ))}
-      </header>
-    </div>
+    <header className="bg-gray-800 text-white p-4 sticky flex justify-between top-0 z-10">
+      {pokemonGenerations.map((gen) => (
+        <Link
+          key={gen.name}
+          className={`flex items-center gap-2 px-4 py-2 rounded-2xl hover:bg-gray-700 ${
+            generation === gen.url ? "bg-gray-700" : ""
+          }`}
+          to={gen.url}
+        >
+          {gen.name}
+        </Link>
+      ))}
+    </header>
   );
 };
 

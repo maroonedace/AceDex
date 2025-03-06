@@ -1,1 +1,75 @@
 @import "tailwindcss";
+
+@theme {
+    --color-normal-card-primary: #A8A77A;
+    --color-normal-card-secondary: #8D8D64;
+    --color-normal-card-tertiary: #C6C6A7;
+
+    --color-fire-card-primary: #EE8130;
+    --color-fire-card-secondary: #C76A29;
+    --color-fire-card-tertiary: #F5AC78;
+
+    --color-water-card-primary: #6390F0;
+    --color-water-card-secondary: #4A74D2;
+    --color-water-card-tertiary: #9DB7F5;
+
+    --color-electric-card-primary: #F7D02C;
+    --color-electric-card-secondary: #C4A720;
+    --color-electric-card-tertiary: #FAE078;
+
+    --color-grass-card-primary: #7AC74C;
+    --color-grass-card-secondary: #5E9E3A;
+    --color-grass-card-tertiary: #A7DB8D;
+
+    --color-ice-card-primary: #96D9D6;
+    --color-ice-card-secondary: #6FB3B0;
+    --color-ice-card-tertiary: #BCE6E6;
+
+    --color-fighting-card-primary: #C22E28;
+    --color-fighting-card-secondary: #A02520;
+    --color-fighting-card-tertiary: #D67873;
+
+    --color-poison-card-primary: #A33EA1;
+    --color-poison-card-secondary: #822F81;
+    --color-poison-card-tertiary: #C183C1;
+
+    --color-ground-card-primary: #E2BF65;
+    --color-ground-card-secondary: #B89B50;
+    --color-ground-card-tertiary: #EBD69D;
+
+    --color-flying-card-primary: #A98FF3;
+    --color-flying-card-secondary: #8873CC;
+    --color-flying-card-tertiary: #C6B7F5;
+
+    --color-psychic-card-primary: #F95587;
+    --color-psychic-card-secondary: #D13D68;
+    --color-psychic-card-tertiary: #FA92B2;
+
+    --color-bug-card-primary: #A6B91A;
+    --color-bug-card-secondary: #849014;
+    --color-bug-card-tertiary: #C6D16E;
+
+    --color-rock-card-primary: #B6A136;
+    --color-rock-card-secondary: #8F7D29;
+    --color-rock-card-tertiary: #D1C17D;
+
+    --color-ghost-card-primary: #735797;
+    --color-ghost-card-secondary: #5A4476;
+    --color-ghost-card-tertiary: #A292BC;
+
+    --color-dragon-card-primary: #6F35FC;
+    --color-dragon-card-secondary: #5429D1;
+    --color-dragon-card-tertiary: #A27DFA;
+
+    --color-dark-card-primary: #705746;
+    --color-dark-card-secondary: #574236;
+    --color-dark-card-tertiary: #A29288;
+
+    --color-steel-card-primary: #B7B7CE;
+    --color-steel-card-secondary: #9090A6;
+    --color-steel-card-tertiary: #D1D1E0;
+
+    --color-fairy-card-primary: #D685AD;
+    --color-fairy-card-secondary: #AE6E8A;
+    --color-fairy-card-tertiary: #F4BDC9;
+}

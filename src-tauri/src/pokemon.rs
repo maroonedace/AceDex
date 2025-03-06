@@ -3,23 +3,8 @@ use rustemon::error::Error;
 use rustemon::model::pokemon::{Pokemon, PokemonSpecies};
 use rustemon::games::generation;
 use rustemon::pokemon::{pokemon, pokemon_species};
-use serde::{Deserialize, Serialize};
 
-use crate::model::PokemonGeneration;
-
-
-#[derive(Serialize, Deserialize)]
-pub struct PokemonData {
-    id: i64,
-    name: String,
-    height: i64,
-    weight: i64,
-    species: String,
-    pokemon_type: Vec<String>,
-    image_url: Option<String>,
-    flavor_text: String,
-    generation: i8,
-}
+use crate::model::{PokemonGeneration, PokemonData};
 
 async fn fetch_pokemon_data(id: i64, client: &RustemonClient) -> Result<Pokemon, Error> {
     match pokemon::get_by_id(id, &client).await {

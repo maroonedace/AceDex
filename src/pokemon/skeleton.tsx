@@ -11,7 +11,7 @@ const Skeleton: FC<SkeletonProps> = ({numberOfSkeletons}) => {
         return (
           <div
             key={index}
-            className="rounded-lg h-[250px] w-[200px] animate-pulse bg-gray-300"
+            className="rounded-lg h-[350px] w-[250px] animate-pulse bg-gray-300"
           />
         );
       })}

@@ -1,5 +1,20 @@
+use serde::{Deserialize, Serialize};
+
 pub struct PokemonGeneration<'a> {
     pub name: &'a str,
+    pub generation: i8,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct PokemonData {
+    pub id: i64,
+    pub name: String,
+    pub height: i64,
+    pub weight: i64,
+    pub species: String,
+    pub pokemon_type: Vec<String>,
+    pub image_url: Option<String>,
+    pub flavor_text: String,
     pub generation: i8,
 }
 
