@@ -4,3 +4,8 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+supabase_rs = { version = "0.3.7", features = ["storage"] }
+dotenv = "0.15.0"
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1", features = ["derive"] }
+rustemon = { version = "*", features = ["serialize"] } 
