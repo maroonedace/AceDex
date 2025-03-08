@@ -1,7 +1,5 @@
 import { createRef, useEffect, useState } from "react";
 import ArrowDropdownSvg from "../../../assets/svg/navigation/arrowDropdown.svg";
-import { collectionLinks } from "../models/navigation";
-import CollectionLink from "../collectionLink";
 
 const Collection = () => {
   const collectionRef = createRef<HTMLDivElement>();
@@ -9,10 +7,6 @@ const Collection = () => {
 
   const toggleCollection = () => {
     setIsCollectionOpen(!isCollectionOpen);
-  };
-
-  const onCollectionClick = () => {
-    setIsCollectionOpen(false);
   };
 
   useEffect(() => {
@@ -46,17 +40,6 @@ const Collection = () => {
           src={ArrowDropdownSvg}
         />
       </button>
-      {isCollectionOpen && (
-        <div className="absolute bg-gray-800 text-white p-4 rounded-2xl right-0 z-10 origin-top-right mt-2">
-          {collectionLinks.map((link) => (
-            <CollectionLink
-              key={link.text}
-              link={link}
-              onClick={onCollectionClick}
-            />
-          ))}
-        </div>
-      )}
     </div>
   );
 };

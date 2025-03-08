@@ -39,10 +39,8 @@ const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
   const inches = Math.round(heightinInches % 12);
   const height = `${feet}'${inches}"`;
   return (
-    <motion.div
-      initial={{ scale: 1 }}
-      whileHover={{ scale: 1.1 }}
-      className={`rounded-lg h-[350px] w-[250px] cursor-pointer p-2 bg-yellow-300`}
+    <div
+      className="rounded-lg h-[350px] w-[250px] p-2 bg-card-background"
     >
       <div
         className={`flex flex-col p-2 ${colors.cardBg} h-full rounded-lg gap-2`}
@@ -80,7 +78,7 @@ const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
