@@ -1,4 +1,3 @@
-import { motion } from "motion/react";
 import { Pokemon } from "../models/pokemon";
 import { FC } from "react";
 import { captialize } from "../utils/converter";
