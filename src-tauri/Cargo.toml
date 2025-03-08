@@ -29,7 +29,7 @@ serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 rustemon = { version = "*", features = ["serialize"] } 
 
-[[bin]]
-name="populate_db"
-path="src/database.rs"
+[workspace]
+resolver = "2"
+members = ["populate_database"]
 
