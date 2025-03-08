@@ -59,12 +59,12 @@ const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
         </div>
         <div>
           <div
-            className={`flex justify-center border border-white ${colors.imageBg}`}
+            className={`flex justify-center border border-gray-700 border-b-0 ${colors.imageBg}`}
           >
             <img src={pokemon.image_url} alt={pokemon.name} />
           </div>
           <div
-            className={`flex flex-col justify-center items-center border border-t-0 border-white rounded-b-lg p-1 ${colors.textBg} gap-1`}
+            className={`flex flex-col justify-center items-center border border-gray-700 rounded-b-lg p-1 bg-card-background gap-1`}
           >
             <div className="flex gap-2">
               <p className="text-xs">No. {pokemon.id}</p>
