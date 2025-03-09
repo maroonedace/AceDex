@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @theme {
+    /* Pokemon type colors */
     --color-normal-card-primary: #A8A77A;
     --color-normal-card-secondary: #8D8D64;
     --color-normal-card-tertiary: #C6C6A7;
@@ -74,4 +75,11 @@
     --color-fairy-card-tertiary: #F4BDC9;
 
     --color-card-background: #979A9C;
+
+    /* Breakpoints */
+    --breakpoint-xs: 36rem;
+    --breakpoint-sm: 48rem;
+    --breakpoint-md: 66rem;
+    --breakpoint-lg: 84rem;
+    --breakpoint-xl: 102rem;
 }
