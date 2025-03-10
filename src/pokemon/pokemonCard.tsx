@@ -40,6 +40,8 @@ const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
   const weight = convertKgToLbs(pokemon.weight);
   const { feet, inches } = convertMeterToFeetAndInches(pokemon.height);
 
+  const hasPreviousEvolution = pokemon.evolves_from.name.length > 0;
+
   const handleImageLoaded = () => {
     setHasImageLoaded(true);
   };
@@ -73,20 +75,9 @@ const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
         </div>
         <div>
           <div
-            className={`flex justify-center border border-gray-700 border-b-0 ${colors.imageBg} relative`}
+            className={`flex justify-center border border-gray-700 border-b-0 ${colors.imageBg}`}
           >
             {!hasImageLoaded && <div className="animate-pulse" />}
-            {pokemon.evolves_from.name.length > 0 && (
-              <div className="absolute w-full left-2 top-2">
-                <div className="w-10 h-10 bg-white">
-                  <img
-                    className="w-full h-full"
-                    src={pokemon.evolves_from.image_url}
-                    alt={pokemon.evolves_from.name}
-                  />
-                </div>
-              </div>
-            )}
             <img
               onLoad={handleImageLoaded}
               src={pokemon.image_url}
@@ -109,7 +100,21 @@ const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
           </div>
         </div>
         <div className="p-2 bg-white rounded-lg border border-gray-700">
-          <p className="text-xs px-2">{pokemon.flavor_text}</p>
+          <div className={`${hasPreviousEvolution ? "border-b pb-2" : ""}`}>
+            <p className="text-xs px-2">{pokemon.flavor_text}</p>
+          </div>
+          {hasPreviousEvolution && (
+            <div className="p-2 flex flex-col items-center gap-2">
+              <p className="text-xs text-center">
+                Evolves from {capitalize(pokemon.evolves_from.name)}
+              </p>
+              <img
+                className="h-16 w-16"
+                src={pokemon.evolves_from.image_url}
+                alt={pokemon.evolves_from.name}
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>
