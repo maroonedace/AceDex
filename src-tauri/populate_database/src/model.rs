@@ -6,15 +6,22 @@ pub struct PokemonGeneration<'a> {
 }
 
 #[derive(Serialize, Deserialize)]
+pub struct EvolvesFrom {
+    pub name: String,
+    pub image_url: String,
+}
+
+#[derive(Serialize, Deserialize)]
 pub struct PokemonData {
     pub id: i64,
     pub name: String,
-    pub height: i64,
-    pub weight: i64,
+    pub height: f32,
+    pub weight: f32,
     pub species: String,
     pub pokemon_type: Vec<String>,
-    pub image_url: Option<String>,
+    pub image_url: String,
     pub flavor_text: String,
+    pub evolves_from: EvolvesFrom,
     pub generation: i8,
 }
 

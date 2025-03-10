@@ -1,3 +1,8 @@
+type EvolvesFrom = {
+    name: string,
+    image_url: string
+}
+
 export type Pokemon = {
     id: number,
     name: string,
@@ -7,6 +12,7 @@ export type Pokemon = {
     pokemon_type: string[],
     image_url: string,
     flavor_text: string,
+    evolves_from: EvolvesFrom,
 }
 
 type PokemonGenerations = {

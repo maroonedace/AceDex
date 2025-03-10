@@ -8,16 +8,23 @@ use std::{env::var, error::Error};
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize)]
+pub struct EvolvesFrom {
+    name: String,
+    image_url: String,
+}
+
+#[derive(Serialize, Deserialize)]
 pub struct PokemonData {
-    pub id: i64,
-    pub name: String,
-    pub height: i64,
-    pub weight: i64,
-    pub species: String,
-    pub pokemon_type: Vec<String>,
-    pub image_url: Option<String>,
-    pub flavor_text: String,
-    pub generation: i8,
+    id: i64,
+    name: String,
+    height: f32,
+    weight: f32,
+    species: String,
+    pokemon_type: Vec<String>,
+    image_url: String,
+    flavor_text: String,
+    generation: i8,
+    evolves_from: EvolvesFrom
 }
 
 

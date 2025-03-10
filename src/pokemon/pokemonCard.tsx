@@ -1,6 +1,10 @@
 import { Pokemon } from "../models/pokemon";
-import { FC } from "react";
-import { capitalize } from "../utils/converter";
+import { FC, useState } from "react";
+import {
+  capitalize,
+  convertKgToLbs,
+  convertMeterToFeetAndInches,
+} from "../utils/converter";
 import { PokemonColors } from "../models/colorConfig";
 import { CardSizes } from "../models/sizeConfig";
 
@@ -28,16 +32,17 @@ const setPokemonCardBg = (type: string[]) => {
 };
 
 const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
+  const [hasImageLoaded, setHasImageLoaded] = useState(false);
+
   const name = capitalize(pokemon.name);
   const colors = setPokemonCardBg(pokemon.pokemon_type);
 
+  const weight = convertKgToLbs(pokemon.weight);
+  const { feet, inches } = convertMeterToFeetAndInches(pokemon.height);
 
-
-  const weight = (pokemon.weight / 10) * 2.20462;
-  const heightInInches = (pokemon.height / 10) * 39.37008;
-  const feet = Math.floor(heightInInches / 12);
-  const inches = Math.round(heightInInches % 12);
-  const height = `${feet}'${inches}"`;
+  const handleImageLoaded = () => {
+    setHasImageLoaded(true);
+  };
   return (
     <div
       className={`rounded-lg ${CardSizes["xs"].height} ${CardSizes["xs"].width} p-2 bg-card-background`}
@@ -68,9 +73,25 @@ const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
         </div>
         <div>
           <div
-            className={`flex justify-center border border-gray-700 border-b-0 ${colors.imageBg}`}
+            className={`flex justify-center border border-gray-700 border-b-0 ${colors.imageBg} relative`}
           >
-            <img src={pokemon.image_url} alt={pokemon.name} />
+            {!hasImageLoaded && <div className="animate-pulse" />}
+            {pokemon.evolves_from.name.length > 0 && (
+              <div className="absolute w-full left-2 top-2">
+                <div className="w-10 h-10 bg-white">
+                  <img
+                    className="w-full h-full"
+                    src={pokemon.evolves_from.image_url}
+                    alt={pokemon.evolves_from.name}
+                  />
+                </div>
+              </div>
+            )}
+            <img
+              onLoad={handleImageLoaded}
+              src={pokemon.image_url}
+              alt={pokemon.name}
+            />
           </div>
           <div
             className={`flex justify-center items-center border border-gray-700 rounded-b-lg py-1 bg-white gap-1`}
@@ -80,14 +101,16 @@ const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
               <p className="text-[8px]">{pokemon.species}</p>
             </div>
             <div className="flex gap-1">
-              <p className="text-[8px]">HT: {height}</p>
+              <p className="text-[8px]">
+                HT: {feet}' {inches}"
+              </p>
               <p className="text-[8px]">WT: {weight.toFixed(1)} lbs</p>
             </div>
           </div>
         </div>
-        <p className="text-xs">
-          {pokemon.flavor_text}
-        </p>
+        <div className="p-2 bg-white rounded-lg border border-gray-700">
+          <p className="text-xs px-2">{pokemon.flavor_text}</p>
+        </div>
       </div>
     </div>
   );
