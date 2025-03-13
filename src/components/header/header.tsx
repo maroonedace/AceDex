@@ -44,7 +44,9 @@ const Header: FC = () => {
   const { generation } = useParams();
 
   return (
-    <header className="bg-gray-800 text-white p-4 sticky flex justify-between top-0 z-10">
+    <header className="bg-gray-800 text-white p-4 sticky top-0 z-10 flex items-center justify-between">
+      <h1>Card Pokedex Tracker</h1>
+      <div className="flex gap-2">
       {pokemonGenerations.map((gen) => (
         <Link
           key={gen.name}
@@ -56,6 +58,7 @@ const Header: FC = () => {
           {gen.name}
         </Link>
       ))}
+      </div>
     </header>
   );
 };

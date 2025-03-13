@@ -1,3 +1,3 @@
-package com.cookbook.app
+package com.maroonedace_cookbook.app
 
 class MainActivity : TauriActivity()

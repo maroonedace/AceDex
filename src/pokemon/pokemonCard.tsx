@@ -99,7 +99,11 @@ const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
             </div>
           </div>
         </div>
-        <div className="p-2 bg-white rounded-lg border border-gray-700">
+        <div
+          className={`p-2 bg-white rounded-lg border border-gray-700 ${
+            hasPreviousEvolution ? "h-full" : ""
+          }`}
+        >
           <div className={`${hasPreviousEvolution ? "border-b pb-2" : ""}`}>
             <p className="text-xs px-2">{pokemon.flavor_text}</p>
           </div>
