@@ -22,10 +22,9 @@ tauri = { version = "2", features = [] }
 supabase_rs = { version = "0.3.7", features = ["storage"] }
 dotenv = "0.15.0"
 tauri-plugin-opener = "2"
-tokio = { version = "1", features = ["full"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
-rustemon = { version = "*", features = ["serialize"] } 
+rustemon = { version = "*", features = ["serialize"] }
 openssl = { version = "0.10", features = ["vendored"] }
 
 [workspace]
