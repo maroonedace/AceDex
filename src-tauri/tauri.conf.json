@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "MaroonedAce's Cookbook",
+  "productName": "Pokedex Tracker",
   "version": "0.1.0",
   "identifier": "com.maroonedace-cookbook.app",
   "build": {
@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "MaroonedAce's Cookbook",
+        "title": "Pokedex Tracker",
         "width": 800,
         "height": 600
       }
