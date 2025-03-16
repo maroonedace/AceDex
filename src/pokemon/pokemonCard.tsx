@@ -40,7 +40,7 @@ const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
   const weight = convertKgToLbs(pokemon.weight);
   const { feet, inches } = convertMeterToFeetAndInches(pokemon.height);
 
-  const hasPreviousEvolution = pokemon.evolves_from.name.length > 0;
+  const hasPreviousEvolution = pokemon.previous_evolution.name.length > 0;
 
   const handleImageLoaded = () => {
     setHasImageLoaded(true);
@@ -110,12 +110,12 @@ const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
           {hasPreviousEvolution && (
             <div className="p-2 flex flex-col items-center gap-2">
               <p className="text-xs text-center">
-                Evolves from {capitalize(pokemon.evolves_from.name)}
+                Evolves from {capitalize(pokemon.previous_evolution.name)}
               </p>
               <img
                 className="h-16 w-16"
-                src={pokemon.evolves_from.image_url}
-                alt={pokemon.evolves_from.name}
+                src={pokemon.previous_evolution.image_url}
+                alt={pokemon.previous_evolution.name}
               />
             </div>
           )}

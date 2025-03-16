@@ -6,7 +6,7 @@ pub struct PokemonGeneration<'a> {
 }
 
 #[derive(Serialize, Deserialize)]
-pub struct EvolvesFrom {
+pub struct PreviousEvolution {
     pub name: String,
     pub image_url: String,
 }
@@ -21,7 +21,7 @@ pub struct PokemonData {
     pub pokemon_type: Vec<String>,
     pub image_url: String,
     pub flavor_text: String,
-    pub evolves_from: EvolvesFrom,
+    pub previous_evolution: PreviousEvolution,
     pub generation: i8,
 }
 

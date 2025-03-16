@@ -578,7 +578,6 @@ version = "0.1.0"
 dependencies = [
  "dotenv",
  "openssl",
- "rustemon",
  "serde",
  "serde_json",
  "supabase_rs",

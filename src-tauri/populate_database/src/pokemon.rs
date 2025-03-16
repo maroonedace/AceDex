@@ -4,7 +4,7 @@ use rustemon::games::generation;
 use rustemon::model::pokemon::{Pokemon, PokemonSpecies};
 use rustemon::pokemon::{pokemon, pokemon_species};
 
-use crate::model::{EvolvesFrom, PokemonData, PokemonGeneration};
+use crate::model::{PreviousEvolution, PokemonData, PokemonGeneration};
 
 fn format_flavor_text(text: &str) -> String {
     let clean_text = text.replace("\n", " ").replace("\x0c", " ");
@@ -105,7 +105,7 @@ pub async fn fetch_pokemon_by_generation(
             image_url: pokemon.sprites.front_default.unwrap_or_default(),
             flavor_text: flavor_text,
             generation: generation_info.generation,
-            evolves_from: EvolvesFrom {
+            previous_evolution: PreviousEvolution {
                 name: evolves_from_pokemon.name,
                 image_url: evolves_from_pokemon.sprites.front_default.unwrap_or_default(),
             },

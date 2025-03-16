@@ -2,12 +2,12 @@ use dotenv::dotenv;
 
 use supabase_rs::SupabaseClient;
 
-use std::{env::var, error::Error};
+use std::{error::Error};
 
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize)]
-pub struct EvolvesFrom {
+pub struct PreviousEvolution {
     name: String,
     image_url: String,
 }
@@ -23,7 +23,7 @@ pub struct PokemonData {
     image_url: String,
     flavor_text: String,
     generation: i8,
-    evolves_from: EvolvesFrom,
+    previous_evolution: PreviousEvolution,
 }
 
 pub async fn fetch_pokemon(generation: i8) -> Result<Vec<PokemonData>, Box<dyn Error>> {
