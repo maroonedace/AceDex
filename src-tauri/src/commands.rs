@@ -2,7 +2,7 @@ use dotenv::dotenv;
 
 use supabase_rs::SupabaseClient;
 
-use std::{error::Error};
+use std::error::Error;
 
 use serde::{Deserialize, Serialize};
 
@@ -26,7 +26,7 @@ pub struct PokemonData {
     previous_evolution: PreviousEvolution,
 }
 
-pub async fn fetch_pokemon(generation: i8) -> Result<Vec<PokemonData>, Box<dyn Error>> {
+pub async fn fetch_pokemon(generation: u8) -> Result<Vec<PokemonData>, Box<dyn Error>> {
     dotenv().ok();
 
     let supabase_url = String::from("https://obeotyhcyygcqyuqbblp.supabase.co");
@@ -39,11 +39,13 @@ pub async fn fetch_pokemon(generation: i8) -> Result<Vec<PokemonData>, Box<dyn E
         supabase_public_api_key,
     );
 
-    let response = supabase_client
-        .select(table_name)
-        .eq("generation", &generation.to_string())
-        .execute()
-        .await?;
+    let mut query = supabase_client.select(table_name);
+
+    if generation != 0 {
+        query = query.eq("generation", &generation.to_string());
+    }
+
+    let response = query.execute().await?;
 
     let pokemon: Vec<PokemonData> = response
         .iter()
@@ -54,7 +56,7 @@ pub async fn fetch_pokemon(generation: i8) -> Result<Vec<PokemonData>, Box<dyn E
 }
 
 #[tauri::command]
-pub async fn get_pokemon_by_generation(generation: i8) -> Result<Vec<PokemonData>, String> {
+pub async fn get_pokemon_by_generation(generation: u8) -> Result<Vec<PokemonData>, String> {
     match fetch_pokemon(generation).await {
         Ok(data) => Ok(data),
         Err(e) => Err(format!("Error fetching data: {}", e)),

@@ -2,14 +2,11 @@ import "./App.css";
 import { FC } from "react";
 import usePokemon from "./services/usePokemon";
 import PokemonCard from "./pokemon/pokemonCard";
-import { useParams } from "react-router";
 import Skeleton from "./pokemon/skeleton";
 
 const App: FC = () => {
 
-  const { generation } = useParams();
-
-  const { pokemon, isPokemonFetched } = usePokemon(Number(generation) || 1);
+  const { pokemon, isPokemonFetched } = usePokemon(null);
 
   return (
     <div className="flex flex-col p-8 justify-center items-center w-full gap-4 bg-gray-900">

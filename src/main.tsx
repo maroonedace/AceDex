@@ -14,8 +14,7 @@ const Main: FC = () => {
         <BrowserRouter>
           <Routes>
             <Route element={<Layout />}>
-              <Route path="/" element={<Navigate to="/1" replace />} />
-              <Route path="/:generation" element={<App />} />
+              <Route path="/" element={<App />} />
             </Route>
           </Routes>
         </BrowserRouter>
