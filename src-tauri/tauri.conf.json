@@ -25,7 +25,7 @@
     "active": true,
     "targets": "all",
     "icon": [
-      "icons/favicon.ico"
+      "icons/icon.ico"
     ]
   }
 }
