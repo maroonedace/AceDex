@@ -1,4 +1,3 @@
-
 use dotenv::dotenv;
 
 use supabase_rs::SupabaseClient;
@@ -24,21 +23,21 @@ pub struct PokemonData {
     image_url: String,
     flavor_text: String,
     generation: i8,
-    evolves_from: EvolvesFrom
+    evolves_from: EvolvesFrom,
 }
-
 
 pub async fn fetch_pokemon(generation: i8) -> Result<Vec<PokemonData>, Box<dyn Error>> {
     dotenv().ok();
 
-    let supabase_url = var("SUPABASE_URL").expect("SUPABASE_URL not set");
-    let supabase_public_api_key =
-        var("SUPABASE_PUBLIC_API_KEY").expect("SUPABASE_PUBLIC_API_KEY not set");
+    let supabase_url = String::from("https://obeotyhcyygcqyuqbblp.supabase.co");
+    let supabase_public_api_key = String::from("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9iZW90eWhjeXlnY3F5dXFiYmxwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzg4Njg0ODEsImV4cCI6MjA1NDQ0NDQ4MX0.D9_E2PV5dHFT_U0gxNvXeiNxOep_zPvkNKi-mifn2_Y");
 
     let table_name = "pokemon";
 
-    let supabase_client: SupabaseClient =
-        SupabaseClient::new(supabase_url, supabase_public_api_key);
+    let supabase_client: SupabaseClient = SupabaseClient::new(
+        supabase_url,
+        supabase_public_api_key,
+    );
 
     let response = supabase_client
         .select(table_name)
