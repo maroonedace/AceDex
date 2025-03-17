@@ -54,7 +54,7 @@ const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
       >
         <div className="flex justify-between items-center">
           <p className="font-medium text-sm">{name}</p>
-          <div className="flex gap-2">
+          {/* <div className="flex gap-2">
             <p
               className={`text-white text-sm ${
                 PokemonColors[pokemon.pokemon_type[0]].secondaryBg
@@ -71,7 +71,7 @@ const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
                 {capitalize(pokemon.pokemon_type[1])}
               </p>
             )}
-          </div>
+          </div> */}
         </div>
         <div>
           <div
@@ -79,12 +79,13 @@ const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
           >
             {!hasImageLoaded && <div className="animate-pulse" />}
             <img
+              className="h-12 w-12"
               onLoad={handleImageLoaded}
               src={pokemon.image_url}
               alt={pokemon.name}
             />
           </div>
-          <div
+          {/* <div
             className={`flex justify-center items-center border border-gray-700 rounded-b-lg py-1 bg-white gap-1`}
           >
             <div className="flex gap-1">
@@ -97,9 +98,9 @@ const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
               </p>
               <p className="text-[8px]">WT: {weight.toFixed(1)} lbs</p>
             </div>
-          </div>
+          </div> */}
         </div>
-        <div
+        {/* <div
           className={`p-2 bg-white rounded-lg border border-gray-700 ${
             hasPreviousEvolution ? "h-full" : ""
           }`}
@@ -119,7 +120,7 @@ const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
               />
             </div>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );

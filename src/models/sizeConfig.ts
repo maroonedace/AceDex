@@ -1,15 +1,15 @@
 export const CardSizes = {
     "xs": {
-        width: "w-[276px]",
-        height: "h-[386px]",
+        width: "w-[110px]",
+        height: "h-[154px]",
     },
     "sm": {
-        width: "sm:w-[150px]",
-        height: "sm:h-[210px]",
+        width: "w-[150px]",
+        height: "h-[210px]",
     },
     "md": {
-        width: "md:w-[200px]",
-        height: "md:h-[280px]",
+        width: "w-[200px]",
+        height: "h-[280px]",
     },
     "lg": {
         width: "lg:w-[250px]",
