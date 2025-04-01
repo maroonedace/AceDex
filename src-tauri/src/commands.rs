@@ -2,7 +2,7 @@ use dotenv::dotenv;
 
 use supabase_rs::SupabaseClient;
 
-use std::error::Error;
+use std::{env::var, error::Error};
 
 use serde::{Deserialize, Serialize};
 
@@ -29,8 +29,9 @@ pub struct PokemonData {
 pub async fn fetch_pokemon(generation: u8) -> Result<Vec<PokemonData>, Box<dyn Error>> {
     dotenv().ok();
 
-    let supabase_url = String::from("https://obeotyhcyygcqyuqbblp.supabase.co");
-    let supabase_public_api_key = String::from("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9iZW90eWhjeXlnY3F5dXFiYmxwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzg4Njg0ODEsImV4cCI6MjA1NDQ0NDQ4MX0.D9_E2PV5dHFT_U0gxNvXeiNxOep_zPvkNKi-mifn2_Y");
+    let supabase_url = var("SUPABASE_URL").expect("SUPABASE_URL not set");
+    let supabase_public_api_key =
+        var("SUPABASE_PUBLIC_API_KEY").expect("SUPABASE_PUBLIC_API_KEY not set");
 
     let table_name = "pokemon";
 

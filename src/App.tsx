@@ -35,8 +35,9 @@ const App: FC = () => {
   }, [input, pokemon]);
 
   return (
-    <div className="flex flex-col p-8 justify-center items-center w-full gap-4 bg-gray-900">
-      <div>
+    <div className="flex flex-col p-8 items-center w-full gap-4 bg-gray-900 min-h-screen">
+      <div className="flex flex-col gap-2">
+        <p className="text-white">Welcome to Pokédex-Ace!</p>
         <input
           className="bg-white rounded-lg px-2"
           onChange={handleInput}
@@ -45,7 +46,7 @@ const App: FC = () => {
           value={input}
         />
       </div>
-      <div className="grid grid-cols-3 gap-1">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
         {isPokemonFetched &&
           filteredPokemon?.map((poke) => {
             return <PokemonCard key={poke.id} pokemon={poke} />;

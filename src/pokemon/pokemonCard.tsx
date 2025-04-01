@@ -6,7 +6,6 @@ import {
   convertMeterToFeetAndInches,
 } from "../utils/converter";
 import { PokemonColors } from "../models/colorConfig";
-import { CardSizes } from "../models/sizeConfig";
 
 interface PokemonCardProps {
   pokemon: Pokemon;
@@ -46,15 +45,13 @@ const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
     setHasImageLoaded(true);
   };
   return (
-    <div
-      className={`rounded-lg ${CardSizes["xs"].height} ${CardSizes["xs"].width} p-2 bg-card-background`}
-    >
+    <div className={`rounded-lg w-[276px] h-[386px] p-2 bg-card-background`}>
       <div
         className={`flex flex-col p-2 ${colors.cardBg} h-full rounded-lg gap-2`}
       >
         <div className="flex justify-between items-center">
           <p className="font-medium text-sm">{name}</p>
-          {/* <div className="flex gap-2">
+          <div className="flex gap-2">
             <p
               className={`text-white text-sm ${
                 PokemonColors[pokemon.pokemon_type[0]].secondaryBg
@@ -71,7 +68,7 @@ const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
                 {capitalize(pokemon.pokemon_type[1])}
               </p>
             )}
-          </div> */}
+          </div>
         </div>
         <div>
           <div
@@ -79,13 +76,12 @@ const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
           >
             {!hasImageLoaded && <div className="animate-pulse" />}
             <img
-              className="h-12 w-12"
               onLoad={handleImageLoaded}
               src={pokemon.image_url}
               alt={pokemon.name}
             />
           </div>
-          {/* <div
+          <div
             className={`flex justify-center items-center border border-gray-700 rounded-b-lg py-1 bg-white gap-1`}
           >
             <div className="flex gap-1">
@@ -98,15 +94,19 @@ const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
               </p>
               <p className="text-[8px]">WT: {weight.toFixed(1)} lbs</p>
             </div>
-          </div> */}
+          </div>
         </div>
-        {/* <div
+        <div
           className={`p-2 bg-white rounded-lg border border-gray-700 ${
             hasPreviousEvolution ? "h-full" : ""
           }`}
         >
           <div className={`${hasPreviousEvolution ? "border-b pb-2" : ""}`}>
-            <p className="text-xs px-2">{pokemon.flavor_text}</p>
+            <p
+              className={`text-xs px-2 ${hasPreviousEvolution ? "line-clamp-3" : ""}`}
+            >
+              {pokemon.flavor_text}
+            </p>
           </div>
           {hasPreviousEvolution && (
             <div className="p-2 flex flex-col items-center gap-2">
@@ -120,7 +120,7 @@ const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
               />
             </div>
           )}
-        </div> */}
+        </div>
       </div>
     </div>
   );
