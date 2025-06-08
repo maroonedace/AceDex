@@ -93,7 +93,7 @@ const App: FC = () => {
       </div>
       <button
         onClick={() => window.scroll({ top: 0, behavior: "smooth" })}
-        className={`flex fixed bottom-4 right-4 bg-gray-800 text-white p-2 rounded-full z-10 cursor-pointer hover:bg-gray-700 transition-opacity duration-300 ${
+        className={`flex fixed bottom-4 right-4 bg-gray-700 text-white p-2 rounded-full z-10 cursor-pointer hover:bg-gray-700 transition-opacity duration-300 ${
           isScrollUpVisible ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       >
