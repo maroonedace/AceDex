@@ -23,3 +23,4 @@ Cross-platform deployment via Tauri
 # 🖼 Preview
 https://github.com/user-attachments/assets/f240dbf7-ef0b-437b-bf0d-2161504ee68f
 
+### Disclaimer: This project is a fan-made application inspired by creature collection games. It is not affiliated with or endorsed by Nintendo, Game Freak, or The Pokémon Company.
