@@ -27,7 +27,7 @@ const Modal: FC<ModalProps> = ({ selectedRecipe, onClose }) => {
             className="fixed bg-gray-300 bg-opacity-50 p-4 w-[90%] lg:w-[70%] xl:w-[50%] min-h-[50%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl flex flex-col gap-4"
           >
             <div className="flex justify-between">
-              <h1 className="text-xl text-black font-bold">
+              <h1 className="text-2xl text-black font-bold">
                 {selectedRecipe.name}
               </h1>
               <button

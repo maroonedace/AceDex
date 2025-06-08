@@ -4,11 +4,14 @@ import usePokemon from "./services/usePokemon";
 import PokemonCard from "./pokemon/pokemonCard";
 import Skeleton from "./pokemon/skeleton";
 import { Pokemon } from "./models/pokemon";
+import Footer from "./components/footer/footer";
 
 const App: FC = () => {
   const { pokemon, isPokemonFetched } = usePokemon(null);
 
   const [input, setInput] = useState("");
+
+  const [isScrollUpVisible, setIsScrollUpVisible] = useState(false);
 
   const [filteredPokemon, setFilteredPokemon] = useState<Pokemon[] | undefined>(
     pokemon
@@ -16,6 +19,15 @@ const App: FC = () => {
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
+  };
+
+  const handleScroll = () => {
+    const position = window.pageYOffset;
+    if (position > 400) {
+      setIsScrollUpVisible(true);
+    } else {
+      setIsScrollUpVisible(false);
+    }
   };
 
   useEffect(() => {
@@ -34,25 +46,49 @@ const App: FC = () => {
     }
   }, [input, pokemon]);
 
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isScrollUpVisible]);
+
   return (
-    <div className="flex flex-col p-8 items-center w-full gap-4 bg-gray-900 min-h-screen">
-      <div className="flex flex-col gap-2">
-        <p className="text-white">Welcome to Pokédex-Ace!</p>
-        <input
-          className="bg-white rounded-lg px-2"
-          onChange={handleInput}
-          type="text"
-          placeholder="Search Pokemon..."
-          value={input}
-        />
+    <div className="flex flex-col w-full relative">
+      <div className="flex flex-col p-8 items-center gap-4 bg-gray-900 min-h-[calc(100vh-112px)]">
+        <h2 className="text-xl font-bold text-white text-center">
+          Welcome to Acedex!
+        </h2>
+        <p className="text-white text-center">
+          This application will allow you to view every Pokémon in a TCG format.
+          Please use the search bar to filter Pokémon.
+        </p>
+        <div className="flex flex-col gap-2">
+          <input
+            className="bg-white rounded-lg px-2"
+            onChange={handleInput}
+            type="text"
+            aria-label="Search Pokémon"
+            placeholder="Search Pokémon..."
+            value={input}
+          />
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
+          {isPokemonFetched &&
+            filteredPokemon?.map((poke) => {
+              return <PokemonCard key={poke.id} pokemon={poke} />;
+            })}
+          {!isPokemonFetched && <Skeleton numberOfSkeletons={24} />}
+        </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
-        {isPokemonFetched &&
-          filteredPokemon?.map((poke) => {
-            return <PokemonCard key={poke.id} pokemon={poke} />;
-          })}
-        {!isPokemonFetched && <Skeleton numberOfSkeletons={24} />}
-      </div>
+      <button
+        onClick={() => window.scroll({ top: 0, behavior: "smooth" })}
+        className={`flex fixed bottom-4 right-4 bg-gray-800 text-white p-2 rounded-full z-10 cursor-pointer hover:bg-gray-700 transition-opacity duration-300 ${isScrollUpVisible ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+      >
+        <span className="material-symbols-outlined">arrow_upward</span>
+      </button>
+      <Footer />
     </div>
   );
 };
