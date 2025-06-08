@@ -1,4 +1,4 @@
-# Acedex
+# AceDex
 
 A full stack desktop application that displays Pokémon in a TCG-style format using Tauri, React, Rust, and Supabase.
 
